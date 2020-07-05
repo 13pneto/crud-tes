@@ -16,26 +16,42 @@ public class Filme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IdFilme")
-	private Integer IdFilme;
+	public Integer IdFilme;
 	
 	@Column(name = "Titulo")
-	private String Titulo;
+	public String Titulo;
 	
 	@Column(name = "Sinopse")
-	private String Sinopse;
+	public String Sinopse;
 	
 	@Column(name = "Data")			///VERIFICAR SE NAO DA ERRO DE VARIAVEL
-	private Date DataLancamento;
+	public String DataLancamento;
 	
 	@Column(name = "Genero")
-	private String Genero;
+	public String Genero;
 	
 	@Column(name = "Nacionalidade")
-	private String Nacionalidade;
+	public String Nacionalidade;
 	
 	@Column(name = "Estoque")
-	private Integer Estoque;
+	public Integer Estoque;
 
+	public Filme() {
+		
+	}
+	
+    public Filme(String titulo, String sinopse, String dataLancamento, String genero, String nacionalidade, Integer estoque)
+    {
+        Titulo = titulo;
+        Sinopse = sinopse;
+        DataLancamento = dataLancamento;
+        Genero = genero;
+        Nacionalidade = nacionalidade;
+        Estoque = estoque;
+    }
+	
+    //---------------------------------------GETTERS and SETTERS-----------------------------------
+    
 	public Integer getIdFilme() {
 		return IdFilme;
 	}
@@ -60,11 +76,11 @@ public class Filme {
 		Sinopse = sinopse;
 	}
 
-	public Date getDataLancamento() {
+	public String getDataLancamento() {
 		return DataLancamento;
 	}
 
-	public void setDataLancamento(Date dataLancamento) {
+	public void setDataLancamento(String dataLancamento) {
 		DataLancamento = dataLancamento;
 	}
 

@@ -14,14 +14,17 @@ public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IdLivro")
-	private Integer IdLivro;
+	public Integer IdLivro;
 	
-	public Integer getIdVeiculo() {
+	@Column(name = "Titulo")
+	public String titulo;	
+	
+	public Integer IdLivro() {
 		return IdLivro;
 	}
 	
-	public void setIdVeiculo(Integer idVeiculo) {
-		this.IdLivro = idVeiculo;
+	public void setIdVeiculo(Integer idLivro) {
+		this.IdLivro = idLivro;
 	}
 	
 	public String getTitulo() {
@@ -32,8 +35,7 @@ public class Livro {
 		this.titulo = titulo;
 	}
 	
-	@Column(name = "Titulo")
-	private String titulo;	
+
 	
 
 }

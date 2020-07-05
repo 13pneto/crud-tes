@@ -1,5 +1,6 @@
 package up.projeto.pedro.livro.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,17 +13,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "TB_Cliente")
-public class Cliente{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "IdCliente")
-	public Integer IdCliente;
+//@Entity
+//@Table(name = "TB_Pessoa")
+public class Pessoa{
+
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.AUTO)
+	 * 
+	 * @Column(name = "IdPessoa")
+	 */
+	private Integer IdPessoa;
 	
 	@Column(name = "Nome")
 	private String Nome;
@@ -38,28 +42,29 @@ public class Cliente{
 	@Column(name = "CriadoEm")
 	private Date CriadoEm;
 	
-	public Cliente() {
+	
+	
+	//Construtor vazio para deixar true qualquer nova pessoa
+	public Pessoa() {
+		Status = true;
 		CriadoEm = new Date();
 	}
 	
-    public Cliente(String nome, String cpf, Boolean status) {
-		super();
-		Nome = nome;
-		Cpf = cpf;
-		Status = status;
+	//Construtor
+	public Pessoa(String nome, String cpf, Boolean status) {
+        this.Nome = nome;
+        this.Cpf = cpf;
+        this.Status = status;
+	}
+	
+	
+	@Override
+	public String  toString() {
+		return this.Nome;
 	}
 
-
-
-	//---------------------------------------GETTERS and SETTERS-----------------------------------
-    	
-	public Integer getIdCliente() {
-		return IdCliente;
-	}
-
-	public void setIdCliente(Integer idCliente) {
-		IdCliente = idCliente;
-	}
+//---------------------------------------GETTERS and SETTERS-----------------------------------
+    
 
 	public String getNome() {
 		return Nome;
@@ -92,7 +97,15 @@ public class Cliente{
 	public void setCriadoEm(Date criadoEm) {
 		CriadoEm = criadoEm;
 	}
-	
-	
 
+	public Integer getIdPessoa() {
+		return IdPessoa;
+	}
+
+	public void setIdPessoa(Integer idPessoa) {
+		IdPessoa = idPessoa;
+	}
+
+	
+	
 }

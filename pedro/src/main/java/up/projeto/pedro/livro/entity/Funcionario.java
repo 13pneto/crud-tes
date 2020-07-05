@@ -1,5 +1,7 @@
 package up.projeto.pedro.livro.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,19 +11,48 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_Funcionario")
-public class Funcionario {
+public class Funcionario{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IdFuncionario")
-	private Integer IdFuncionario;
+	public Integer IdFuncionario;
+	
+	@Column(name = "Nome")
+	private String Nome;
+	
+	
+	@Column(name = "Cpf")
+	private String Cpf;
+	
+	
+	@Column(name = "Status")
+	private Boolean Status;
+	
+	@Column(name = "CriadoEm")
+	private Date CriadoEm;
 	
 	@Column(name = "Salario")
-	private Double Salario;
+	public Double Salario;
 	
 	@Column(name = "Comissao")
-	private Double Comissao;
+	public Double Comissao;
+	
+	public Funcionario() {
+		
+	}
+	
+	public Funcionario(String nome, String cpf, Boolean status, Double salario, Double comissao) {
+		this.Nome = nome;
+		this.Cpf = cpf;
+		this.Status = status;
+		this.Salario = salario;
+		this.Comissao = comissao;
+	}
 
+    //---------------------------------------GETTERS and SETTERS-----------------------------------
+    
+	
 	public Integer getIdFuncionario() {
 		return IdFuncionario;
 	}
@@ -45,7 +76,39 @@ public class Funcionario {
 	public void setComissao(Double comissao) {
 		Comissao = comissao;
 	}
-	
-	
 
+	public String getNome() {
+		return Nome;
+	}
+
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+
+	public String getCpf() {
+		return Cpf;
+	}
+
+	public void setCpf(String cpf) {
+		Cpf = cpf;
+	}
+
+	public Boolean getStatus() {
+		return Status;
+	}
+
+	public void setStatus(Boolean status) {
+		Status = status;
+	}
+
+	public Date getCriadoEm() {
+		return CriadoEm;
+	}
+
+	public void setCriadoEm(Date criadoEm) {
+		CriadoEm = criadoEm;
+	}
+	
+	
+	
 }

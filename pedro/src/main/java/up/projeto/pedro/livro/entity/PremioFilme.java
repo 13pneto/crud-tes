@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,16 +17,24 @@ public class PremioFilme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IdPremioFilme")
-	private Integer IdPremioFilme;
+	public Integer IdPremioFilme;
 
 	@JoinColumn(name = "FK_Premio")
 	@OneToOne
-	private Premio Premio;
+	public Premio Premio;
 
 	@JoinColumn(name = "FK_Filme")
 	@ManyToOne
-	private Filme Filme;
+	public Filme Filme;
+	
+	@Column(name = "Status")
+	public Boolean Status;
 
+	@Column(name = "CriadoEm")
+	public String CriadoEm;
+	//---------------------------------------GETTERS and SETTERS-----------------------------------
+    
+	
 	public Integer getIdPremioFilme() {
 		return IdPremioFilme;
 	}
@@ -52,6 +59,23 @@ public class PremioFilme {
 		Filme = filme;
 	}
 
+	public Boolean getStatus() {
+		return Status;
+	}
+
+	public void setStatus(Boolean status) {
+		Status = status;
+	}
+
+	public String getCriadoEm() {
+		return CriadoEm;
+	}
+
+	public void setCriadoEm(String criadoEm) {
+		CriadoEm = criadoEm;
+	}
+
+	
 	
 
 }

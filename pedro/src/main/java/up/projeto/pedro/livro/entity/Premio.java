@@ -18,7 +18,13 @@ public class Premio {
 	
 	@Column(name = "Descricao")
 	private String Descricao;
-
+	
+	public Premio() {
+		
+	}
+	
+	//---------------------------------------GETTERS and SETTERS-----------------------------------
+    
 	public Integer getIdPremio() {
 		return IdPremio;
 	}
