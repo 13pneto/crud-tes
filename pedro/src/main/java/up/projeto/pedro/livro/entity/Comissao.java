@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,22 +16,23 @@ import javax.persistence.Table;
 public class Comissao {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_comissoes")
+	@SequenceGenerator(name = "sequence_id_comissoes", sequenceName = "sequence_comissao")
 	@Column(name = "IdComissao")
-	public Integer IdComissao;
+	private Integer IdComissao;
 	
-	@JoinColumn(name = "FK_Locacao")
+	@JoinColumn(name = "FK_Comissao")
 	@OneToOne
-	public Locacao Locacao;
+	private Locacao Locacao;
 	
 	@Column(name = "ValorComissao")
-	public Double ValorComissao;
+	private Double ValorComissao;
 	
 	@Column(name = "Status")
-	public Boolean Status;
+	private Boolean Status;
 	
 	@Column(name = "CriadoEm")
-	public Date CriadoEm;
+	private Date CriadoEm;
 	
 	/*
 	 * public Comissao() { Status = true; CriadoEm = new Date(); ValorComissao =
@@ -38,15 +40,15 @@ public class Comissao {
 	 */
 	
 	public Comissao() {
-		
+		CriadoEm = new Date();
 	}
 
     public Comissao(Locacao l)
     {
         this.Locacao = l;
         Status = true;
-        CriadoEm = new Date();
-        this.ValorComissao = (l.Valor * l.Funcionario.Comissao) / 100;
+        //CriadoEm = new Date();
+        this.ValorComissao = (l.getValor() * l.getFuncionario().getComissao()) / 100;
     }
 
     //---------------------------------------GETTERS and SETTERS-----------------------------------

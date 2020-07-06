@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import up.projeto.pedro.livro.entity.Funcionario;
-import up.projeto.pedro.livro.entity.Livro;
 import up.projeto.pedro.livro.service.FuncionarioService;
-import up.projeto.pedro.livro.service.LivroService;
 
 @RestController
 @RequestMapping("/funcionario")

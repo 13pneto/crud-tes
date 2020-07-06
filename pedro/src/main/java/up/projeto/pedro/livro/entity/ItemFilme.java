@@ -1,11 +1,14 @@
 package up.projeto.pedro.livro.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
@@ -14,7 +17,8 @@ import javax.persistence.JoinColumn;
 public class ItemFilme {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_itensfilme")
+	@SequenceGenerator(name = "sequence_id_itensfilme", sequenceName = "sequence_itemfilme")
 	@Column(name = "IdItemFilme")
 	public Integer IdItemFilme;
 	
@@ -26,6 +30,12 @@ public class ItemFilme {
 	@Column(name = "Quantidade")
 	public Integer Quantidade;
 
+	@Column(name = "CriadoEm")
+	public Date CriadoEm;
+	
+	public void ItemFilme() {
+		CriadoEm = new Date();
+	}
 //---------------------------------------GETTERS and SETTERS-----------------------------------
     	
 	public Integer getIdItemFilme() {
@@ -50,6 +60,14 @@ public class ItemFilme {
 
 	public void setQuantidade(Integer quantidade) {
 		Quantidade = quantidade;
+	}
+
+	public Date getCriadoEm() {
+		return CriadoEm;
+	}
+
+	public void setCriadoEm(Date criadoEm) {
+		CriadoEm = criadoEm;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package up.projeto.pedro.livro.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,23 +18,28 @@ import javax.persistence.Table;
 public class PremioFilme {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_premiosfilmes")
+	@SequenceGenerator(name = "sequence_id_premiosfilmes", sequenceName = "sequence_premiofilme")
 	@Column(name = "IdPremioFilme")
-	public Integer IdPremioFilme;
+	private Integer IdPremioFilme;
 
 	@JoinColumn(name = "FK_Premio")
-	@OneToOne
-	public Premio Premio;
+	@ManyToOne
+	private Premio Premio;
 
 	@JoinColumn(name = "FK_Filme")
 	@ManyToOne
-	public Filme Filme;
+	private Filme Filme;
 	
 	@Column(name = "Status")
-	public Boolean Status;
+	private Boolean Status;
 
 	@Column(name = "CriadoEm")
-	public String CriadoEm;
+	private Date CriadoEm;
+	
+	public PremioFilme() {
+		CriadoEm = new Date();
+	}
 	//---------------------------------------GETTERS and SETTERS-----------------------------------
     
 	
@@ -67,11 +75,11 @@ public class PremioFilme {
 		Status = status;
 	}
 
-	public String getCriadoEm() {
+	public Date getCriadoEm() {
 		return CriadoEm;
 	}
 
-	public void setCriadoEm(String criadoEm) {
+	public void setCriadoEm(Date criadoEm) {
 		CriadoEm = criadoEm;
 	}
 

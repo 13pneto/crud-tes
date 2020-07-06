@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import up.projeto.pedro.livro.entity.Cliente;
 import up.projeto.pedro.livro.repository.ClienteRepository;
-import up.projeto.pedro.livro.repository.LivroRepository;
 
 @Service
 public class ClienteService {

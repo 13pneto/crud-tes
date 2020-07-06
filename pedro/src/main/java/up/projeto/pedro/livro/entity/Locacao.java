@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,39 +20,40 @@ import javax.persistence.Table;
 public class Locacao {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_locacoes")
+	@SequenceGenerator(name = "sequence_id_locacoes", sequenceName = "sequence_locacao")
 	@Column(name = "IdLocacao")
-	public Integer IdLocacao;
+	private Integer IdLocacao;
 
 	@JoinColumn(name = "FK_ItemFilmeFilmes")
 	@OneToMany
-	public List<ItemFilme> Filmes;
+	private List<ItemFilme> Filmes;
 
 	@JoinColumn(name = "FK_Cliente")
-	@OneToOne
-	public Cliente Cliente;
+	@ManyToOne
+	private Cliente Cliente;
 	
 	@JoinColumn(name = "FK_Funcionario")
 	@ManyToOne
-	public Funcionario Funcionario;
+	private Funcionario Funcionario;
 
 	@Column(name = "DataLocacao")
-	public Date DataLocacao;
+	private Date DataLocacao;
 
 	@Column(name = "DataDevolucao")
-	public Date DataDevolucao;
+	private Date DataDevolucao;
 	
 	@Column(name = "DataDevolvida")
-	public Date DataDevolvida;
+	private Date DataDevolvida;
 	
 	@Column(name = "Valor")
-	public Double Valor;
+	private Double Valor;
 	
 	@Column(name = "Status")
-	public Boolean Status;
+	private Boolean Status;
 	
 	@Column(name = "CriadoEm")
-	public Date CriadoEm;
+	private Date CriadoEm;
 	
     public Locacao()
     {

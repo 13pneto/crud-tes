@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,9 +15,10 @@ import javax.persistence.Table;
 public class Funcionario{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_funcionarios")
+	@SequenceGenerator(name = "sequence_id_funcionarios", sequenceName = "sequence_funcionario")
 	@Column(name = "IdFuncionario")
-	public Integer IdFuncionario;
+	private Integer IdFuncionario;
 	
 	@Column(name = "Nome")
 	private String Nome;
@@ -33,13 +35,13 @@ public class Funcionario{
 	private Date CriadoEm;
 	
 	@Column(name = "Salario")
-	public Double Salario;
+	private Double Salario;
 	
 	@Column(name = "Comissao")
-	public Double Comissao;
+	private Double Comissao; //Em %
 	
 	public Funcionario() {
-		
+		CriadoEm = new Date();
 	}
 	
 	public Funcionario(String nome, String cpf, Boolean status, Double salario, Double comissao) {
@@ -49,6 +51,7 @@ public class Funcionario{
 		this.Salario = salario;
 		this.Comissao = comissao;
 	}
+	
 
     //---------------------------------------GETTERS and SETTERS-----------------------------------
     

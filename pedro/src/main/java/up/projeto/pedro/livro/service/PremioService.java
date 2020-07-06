@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import up.projeto.pedro.livro.entity.Premio;
 import up.projeto.pedro.livro.repository.PremioRepository;
-import up.projeto.pedro.livro.repository.LivroRepository;
 
 @Service
 public class PremioService {
