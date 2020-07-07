@@ -30,8 +30,12 @@ public class FilmeService {
 		filmeRep.delete(filme);
 	}
 	
+	public void excluirPorId(Integer id) {
+		Filme f = buscarPorId(id);
+		filmeRep.delete(f);
+	}
+	
 	public Filme buscarPorId(Integer id) {
 		return filmeRep.findById(id).get();
 	}
-	
 }
