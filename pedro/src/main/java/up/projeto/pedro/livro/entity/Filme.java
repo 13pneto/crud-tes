@@ -3,7 +3,12 @@ package up.projeto.pedro.livro.entity;
 
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +47,12 @@ public class Filme {
 	private Integer Estoque;
 	
 	@Column(name = "CriadoEm")
-	private Date CriadoEm;
+	private String CriadoEm;
 
 	public Filme() {
-		CriadoEm = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); //Padrão da data
+		Date data = new Date(); 
+		CriadoEm = sdf.format(data); //Converte a data para String
 	}
 	
     public Filme(String titulo, String sinopse, String dataLancamento, String genero, String nacionalidade, Integer estoque)
@@ -116,11 +123,11 @@ public class Filme {
 		Estoque = estoque;
 	}
 
-	public Date getCriadoEm() {
+	public String getCriadoEm() {
 		return CriadoEm;
 	}
 
-	public void setCriadoEm(Date criadoEm) {
+	public void setCriadoEm(String criadoEm) {
 		CriadoEm = criadoEm;
 	}
 	
