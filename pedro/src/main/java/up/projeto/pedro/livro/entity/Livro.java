@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -12,28 +13,20 @@ import javax.persistence.Table;
 public class Livro {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_livros")
+	@SequenceGenerator(name = "sequence_id_livros", sequenceName = "sequence_livro")
 	@Column(name = "IdLivro")
-	private Integer IdLivro;
-	
-	public Integer getIdVeiculo() {
-		return IdLivro;
-	}
-	
-	public void setIdVeiculo(Integer idVeiculo) {
-		this.IdLivro = idVeiculo;
-	}
-	
-	public String getTitulo() {
-		return titulo;
-	}
-	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+	public Integer IdLivro;
 	
 	@Column(name = "Titulo")
-	private String titulo;	
+	public String titulo;	
+	
+	public Livro() {
+		
+	}
+	
+
+
 	
 
 }

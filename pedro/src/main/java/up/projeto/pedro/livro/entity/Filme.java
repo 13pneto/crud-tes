@@ -1,12 +1,21 @@
 package up.projeto.pedro.livro.entity;
 
-import java.sql.Date;
+
+
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +23,8 @@ import javax.persistence.Table;
 public class Filme {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id_filmes")
+	@SequenceGenerator(name = "sequence_id_filmes", sequenceName = "sequence_filme")
 	@Column(name = "IdFilme")
 	private Integer IdFilme;
 	
@@ -25,7 +35,7 @@ public class Filme {
 	private String Sinopse;
 	
 	@Column(name = "Data")			///VERIFICAR SE NAO DA ERRO DE VARIAVEL
-	private Date DataLancamento;
+	private String DataLancamento;
 	
 	@Column(name = "Genero")
 	private String Genero;
@@ -35,7 +45,28 @@ public class Filme {
 	
 	@Column(name = "Estoque")
 	private Integer Estoque;
+	
+	@Column(name = "CriadoEm")
+	private String CriadoEm;
 
+	public Filme() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); //Padrão da data
+		Date data = new Date(); 
+		CriadoEm = sdf.format(data); //Converte a data para String
+	}
+	
+    public Filme(String titulo, String sinopse, String dataLancamento, String genero, String nacionalidade, Integer estoque)
+    {
+        Titulo = titulo;
+        Sinopse = sinopse;
+        DataLancamento = dataLancamento;
+        Genero = genero;
+        Nacionalidade = nacionalidade;
+        Estoque = estoque;
+    }
+	
+    //---------------------------------------GETTERS and SETTERS-----------------------------------
+    
 	public Integer getIdFilme() {
 		return IdFilme;
 	}
@@ -60,11 +91,11 @@ public class Filme {
 		Sinopse = sinopse;
 	}
 
-	public Date getDataLancamento() {
+	public String getDataLancamento() {
 		return DataLancamento;
 	}
 
-	public void setDataLancamento(Date dataLancamento) {
+	public void setDataLancamento(String dataLancamento) {
 		DataLancamento = dataLancamento;
 	}
 
@@ -90,6 +121,14 @@ public class Filme {
 
 	public void setEstoque(Integer estoque) {
 		Estoque = estoque;
+	}
+
+	public String getCriadoEm() {
+		return CriadoEm;
+	}
+
+	public void setCriadoEm(String criadoEm) {
+		CriadoEm = criadoEm;
 	}
 	
 	
