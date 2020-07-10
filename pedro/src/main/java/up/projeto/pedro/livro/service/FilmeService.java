@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.istack.Nullable;
+
 import up.projeto.pedro.livro.commom.exception.BusinessException;
 import up.projeto.pedro.livro.commom.exception.BusinessExceptionCode;
 import up.projeto.pedro.livro.entity.Filme;
@@ -21,7 +23,13 @@ public class FilmeService {
 	private FilmeRepository filmeRep;
 	
 	@Transactional
-	public Filme salvar(Filme filme) {
+	public Filme salvar(Filme filme) {	
+		if(verificaDuplicidadePorTitulo(filme)){
+			BusinessExceptionCode codiErro = BusinessExceptionCode.ERR007;
+			BusinessException b = new BusinessException(codiErro);
+			throw b;
+		}
+		
 		return filmeRep.save(filme);
 	}
 	
@@ -37,6 +45,7 @@ public class FilmeService {
 	
 	public void excluir(Filme filme) {
 		try {
+			
 			filmeRep.delete(filme);
 		} catch (Exception e) {
 			BusinessExceptionCode codiErro = BusinessExceptionCode.ERR003;
@@ -46,15 +55,14 @@ public class FilmeService {
 	}
 	
 	public void excluirPorId(Integer id) {
-		Filme f = buscarPorId(id);	
-		
-		if(f == null) {
+		try {
+		Filme f = buscarPorId(id);
+		if(f.getCriadoEm() == null) {
 			BusinessExceptionCode codiErro = BusinessExceptionCode.ERR004;
 			BusinessException b = new BusinessException(codiErro);
 			throw b;
 		}
-
-		try {
+	
 			filmeRep.delete(f);
 		} catch (Exception e) {
 			BusinessExceptionCode codiErro = BusinessExceptionCode.ERR003;
@@ -65,6 +73,20 @@ public class FilmeService {
 	
 	public Filme atualizar(Filme filme) {
 		return filmeRep.save(filme);
+	}
+	
+/**
+ * 
+ * @param Filme (Objeto)
+ * @return boolean (True = OBJETO ENCONTRADO (DUPLICIDADE))
+ */
+	public boolean verificaDuplicidadePorTitulo(Filme f) {			//Verificar se um filme já esta cadastrado com um determinado titulo
+		String teste = f.getTitulo();
+		Filme temp = filmeRep.FindByTitle(f.getTitulo());
+		if(temp == null) {	//verifica se o objeto encontrado existe (não é nulo)
+			return false;	//objeto não encontrado, retorna FALSE
+		}
+		return true;		//objeto ENCONTRADO retorna TRUE
 	}
 	
 	public Filme buscarPorId(Integer id) {

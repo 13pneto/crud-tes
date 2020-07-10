@@ -45,9 +45,9 @@ public class FilmeController {
 		filmeService.excluirPorId(id);
 	}
 	
-	@PutMapping(value = "/{id}", consumes = "application/json")	
+	@PutMapping(value = "//{id}", consumes = "application/json")	
 	public Filme atualizar(@RequestBody Filme filme1) {
-		return filmeService.salvar(filme1);
+		return filmeService.atualizar(filme1);
 	}
 
 	
